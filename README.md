@@ -106,10 +106,6 @@ ADMIN_TOKEN=...                # довгий випадковий токен д
 VITE_API_BASE=http://localhost:3000
 # продакшен
 # VITE_API_BASE=https://<your-backend>.onrender.com
-```
-
-> **Не коміть** `.env` у репозиторій.
-
 ---
 
 ## Локальний запуск
@@ -195,9 +191,6 @@ curl -X POST "http://localhost:3000/notify" \
   -H "X-Notify-Secret: <NOTIFY_SECRET>" -H "Content-Type: application/json" \
   -d '{"event":"deploy","status":"ok"}'
 ```
-
----
-
 ## Деплой (Render / Vercel)
 
 ### Backend — Render (Web Service)
@@ -223,31 +216,5 @@ curl -X POST "http://localhost:3000/notify" \
 - Build: `npm run build`
 - Output: `dist`
 - ENV: `VITE_API_BASE=...` (Production/Preview)
-- Зроби **Redeploy** після зміни ENV.
 
----
 
-## Безпека та поради
-- **Не коміть** `.env` та ключі.
-- Для Cloudflare краще **API Token** з мінімальними правами, ніж Global Key.
-- У проді обмеж **CORS** бекенда на домен UI.
-- Використовуй **NOTIFY_SECRET** для `/notify`.
-- `ADMIN_TOKEN` має бути довгим випадковим рядком; зберігай у ENV.
-- Бот запускається **або** в проді, **або** локально — не одночасно (інакше 409).
-
----
-
-## Налагодження
-- **409 Conflict (Telegram polling):** одночасно працює інший інстанс бота — вимкни зайвий.
-- **`⛔ Доступ із цього чату заборонено`**: перевір `ALLOWED_CHAT_ID` або чат, де пишеш.
-- **Приват не пускає:** додай користувача в whitelist (username **без `@`** або **telegramId**). ID можна отримати командою `/myid`.
-- **500 на `/api/users`:** немає `ADMIN_TOKEN` або неправильний заголовок `Authorization`.
-- **Mongo auth failed:** перевір `MONGODB_URI` та IP whitelist у MongoDB Atlas.
-- **UI не бачить бекенд:** перевір `VITE_API_BASE` (і redeploy UI), CORS на бекенді.
-
----
-
-## Ліцензія
-MIT (або вкажи свою).
-
-**Автор:** (додай ім’я/контакти)
